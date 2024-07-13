@@ -3,8 +3,10 @@ import json
 import time
 import os
 
+host='192.168.0.83:11434'
+
 def request(file_content):
-  client = Client(host='http://192.168.0.39:11434')
+  client = Client(host)
   try:
     response = client.chat(model='gemma2', messages=[
       {
