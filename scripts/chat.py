@@ -1,3 +1,5 @@
+# will seed a database with LLM insights
+
 from ollama import Client
 import json
 import time

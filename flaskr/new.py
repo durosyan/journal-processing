@@ -1,6 +1,7 @@
 import os
 from datetime import datetime
 import logging
+from jinja2 import Environment, FileSystemLoader
 
 logger = logging.getLogger(__name__)
 
@@ -9,7 +10,7 @@ def main():
     logger.info('Finished')
 
 if __name__ == '__main__':
-	logging.basicConfig(filename='myapp.log', level=logging.INFO)
+	logging.basicConfig(filename='new_file.log', level=logging.INFO)
 
 	# Get the current date and time
 	now = datetime.now()
