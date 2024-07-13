@@ -1,6 +1,6 @@
 import os
-from datetime import datetime
 import logging
+from datetime import datetime
 from jinja2 import Environment, FileSystemLoader
 
 logger = logging.getLogger(__name__)
@@ -10,13 +10,13 @@ def main():
     logger.info('Finished')
 
 if __name__ == '__main__':
-	logging.basicConfig(filename='new_file.log', level=logging.INFO)
+	logging.basicConfig(filename='new_entry.log', level=logging.INFO)
 
 	# Get the current date and time
 	now = datetime.now()
 	formatted_date = now.strftime("%H%M%d%m%Y")
 
-	template_file = "template.md"
+	template_file = "./templates/template.md"
 	new_file = f"Entry_{formatted_date}.md"
 
 	# Create a new file based on the template

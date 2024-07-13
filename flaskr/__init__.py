@@ -2,7 +2,6 @@ import os
 import logging
 from flask import Flask
 
-
 logger = logging.getLogger(__name__)
 
 def create_app(test_config=None):
