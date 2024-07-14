@@ -18,7 +18,7 @@ import os
 import markdown
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Sample argument parser")
+    parser = argparse.ArgumentParser(description="personal markdown journal")
     parser.add_argument("directory")
     parser.add_argument("index")
     args = parser.parse_args()
@@ -41,6 +41,10 @@ if __name__ == "__main__":
                     md = markdown.Markdown(extensions=['meta'])
                     md.convert(file_content)
                     print(md.Meta)
+
+    # print(entries)
+    # for entry in entries:
+    #     print(entry['file'])
 
     # # Write the extracted data to the JSON index file
     # with open(index, 'w') as index_file:
