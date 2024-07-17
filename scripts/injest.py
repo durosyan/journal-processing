@@ -46,13 +46,10 @@ if __name__ == "__main__":
                         mood = int(md.Meta['mood'][0])
                         date_string = md.Meta['posted'][0].replace('"', '').replace('/', '')
                         date_obj = datetime.strptime(date_string, '%H%M %d%m%Y')
-                        
+                        print(os.path.basename(file.name))
                         
 
-    # print(entries)
-    # for entry in entries:
-    #     print(entry['file'])
-
+                        
     # # Write the extracted data to the JSON index file
     # with open(index, 'w') as index_file:
     #     json.dump(entries, index_file, indent=4)
