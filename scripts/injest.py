@@ -16,6 +16,7 @@ import json
 import re
 import os
 import markdown
+from datetime import datetime
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="personal markdown journal")
@@ -40,7 +41,13 @@ if __name__ == "__main__":
                     file_content = file.read()
                     md = markdown.Markdown(extensions=['meta'])
                     md.convert(file_content)
-                    print(md.Meta)
+                    keys = md.Meta.keys()
+                    if 'posted' in keys and 'mood' in keys:
+                        mood = int(md.Meta['mood'][0])
+                        date_string = md.Meta['posted'][0].replace('"', '').replace('/', '')
+                        date_obj = datetime.strptime(date_string, '%H%M %d%m%Y')
+                        
+                        
 
     # print(entries)
     # for entry in entries:
