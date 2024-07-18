@@ -16,6 +16,8 @@ import json
 import re
 import os
 import markdown
+import pandas as pd
+import matplotlib.pyplot as plt
 from datetime import datetime
 
 if __name__ == "__main__":
@@ -28,6 +30,8 @@ if __name__ == "__main__":
     index = os.path.abspath(args.index)
 
     entries = []
+    entry_dates = []
+    moods = []
 
     if os.path.exists(index):
         with open(index, 'r') as index_file:
@@ -46,12 +50,22 @@ if __name__ == "__main__":
                         mood = int(md.Meta['mood'][0])
                         date_string = md.Meta['posted'][0].replace('"', '').replace('/', '')
                         date_obj = datetime.strptime(date_string, '%H%M %d%m%Y')
+                        moods.append(mood)
+                        entry_dates.append(date_obj)
                         print(os.path.basename(file.name))
-                        
 
                         
     # # Write the extracted data to the JSON index file
     # with open(index, 'w') as index_file:
     #     json.dump(entries, index_file, indent=4)
+    date_time = pd.to_datetime(entry_dates)
+    DF = pd.DataFrame()
+    DF['value'] = moods
+    DF = DF.set_index(date_time)
+    plt.plot(DF)
+    plt.gcf().autofmt_xdate()
+    plt.show()
+
+
 
     print(f"Processed {len(entries)} files. Data saved to {index}")
