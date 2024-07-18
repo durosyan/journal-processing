@@ -23,19 +23,19 @@ from datetime import datetime
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="personal markdown journal")
     parser.add_argument("directory")
-    parser.add_argument("index")
+    # parser.add_argument("index")
     args = parser.parse_args()
 
     directory = os.path.abspath(args.directory)
-    index = os.path.abspath(args.index)
+    # index = os.path.abspath(args.index)
 
-    entries = []
+    # entries = []
     entry_dates = []
     moods = []
 
-    if os.path.exists(index):
-        with open(index, 'r') as index_file:
-            entries = json.load(index_file)
+    # if os.path.exists(index):
+    #     with open(index, 'r') as index_file:
+    #         entries = json.load(index_file)
 
     for root, dirs, files in os.walk(directory):
         for name in files:
@@ -66,6 +66,4 @@ if __name__ == "__main__":
     plt.gcf().autofmt_xdate()
     plt.show()
 
-
-
-    print(f"Processed {len(entries)} files. Data saved to {index}")
+    # print(f"Processed {len(entries)} files. Data saved to {index}")
