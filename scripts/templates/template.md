@@ -1,7 +1,7 @@
 ---
 title: {{ title }}
-posted: {{ date }}
+posted: {{ posted }}
 mood: {{ mood }}
 ---
 
-{{ content }}
+content.
