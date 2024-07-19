@@ -43,10 +43,8 @@ if __name__ == "__main__":
                         moods.append(mood)
                         entry_dates.append(date_obj)
                         print(os.path.basename(file.name))
-    date_time = pd.to_datetime(entry_dates)
-    DF = pd.DataFrame()
-    DF['value'] = moods
-    DF = DF.set_index(date_time)
-    plt.plot(DF)
+    
+    DF = pd.DataFrame({'date': entry_dates, 'mood': moods})
+    plt.scatter(DF['date'], DF['mood'])
     plt.gcf().autofmt_xdate()
     plt.show()
