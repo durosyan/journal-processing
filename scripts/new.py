@@ -1,12 +1,8 @@
 import os
-import logging
 from datetime import datetime
 from jinja2 import Template
 
-logger = logging.getLogger(__name__)
-
 if __name__ == '__main__':
-	# logging.basicConfig(filename='new_entry.log', level=logging.INFO)
 	# Get the current date and time
 	now = datetime.now()
 	formatted_date = now.strftime("%H%M%d%m%Y")
@@ -23,13 +19,12 @@ if __name__ == '__main__':
 			print(f"opened template file: {template_file}")
 			template_content = f.read()
 			template = Template(template_content)
-			properties = { "posted": now.strftime("%H%M %d/%m/%Y"), "title": title }
+			properties = {"posted": now.strftime("%H%M %d/%m/%Y"), "title": title}
 			rendered_content = template.render(properties)
 
 		with open(new_file, "w") as f:
 			print(f"created new file: {new_file}")
 			f.write(rendered_content)
 
-		# logger.info(f"created new file: {new_file}")
 	except Exception as e:
-		logger.info(f"failed to create new file: {new_file}")
+		print(f"failed to create new file: {new_file}")

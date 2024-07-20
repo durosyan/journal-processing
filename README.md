@@ -1,11 +1,8 @@
 # journal-processing
 
-some simple scripts for working with markdown files
-uses jinja2 templating to create a journal entry.
+Some simple scripts for working with markdown journal files.
 
----
-
-Usage:
+## Setup
 
 ```
 python3 -m venv .
