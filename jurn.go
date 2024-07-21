@@ -5,12 +5,15 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"time"
 )
 
 func main() {
 	// Define command line arguments
-	filePath := flag.String("file", "", "Path to the template file")
-	// entryTitle := flag.String("title", "", "Entry title")
+	pwd, err := os.Getwd()
+	filePath := flag.String("template", "", "Path to the template file")
+	entryTitle := flag.String("title", "", "Entry title")
+	outputDir := flag.String("output", pwd, "Output directory")
 	verbose := flag.Bool("verbose", false, "Enable verbose mode")
 
 	// Parse command line arguments
@@ -29,9 +32,19 @@ func main() {
 		os.Exit(1)
 	}
 
+	// Resolve the output directory
+	absOutputDir, err := filepath.Abs(*outputDir)
+	if err != nil {
+		fmt.Println("Error resolving output directory:", err)
+		os.Exit(1)
+	}
+
 	// Access the parsed arguments
-	fmt.Println("File Path:", *filePath)
-	fmt.Println("Verbose Mode:", *verbose)
+	if *verbose {
+		fmt.Println("Verbose Mode:", *verbose)
+		fmt.Println("Entry Title:", *entryTitle)
+		fmt.Println("File Path:", absFilePath)
+	}
 
 	// Read the file
 	content, err := os.Open(absFilePath)
@@ -48,6 +61,26 @@ func main() {
 		return
 	}
 
-	// Print the file content
-	fmt.Println(string(fileContent))
+	// Get current date and time
+	date := time.Now().Format("150402012006")
+
+
+	// Create the output file
+	outputFile, err := os.Create(filepath.Join(absOutputDir, "Entry_"+date+".md"))
+	if err != nil {
+		fmt.Println("Error creating output file:", err)
+		return
+	}
+
+	
+
+	// Write the entry title to the output file
+	_, err = outputFile.WriteString("--- \n" + *entryTitle + "\n")
+
+	// Write the file content to the output file
+	_, err = outputFile.Write(fileContent)
+	if err != nil {
+		fmt.Println("Error writing to output file:", err)
+		return
+	}
 }
