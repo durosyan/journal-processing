@@ -1,18 +1,35 @@
 import argparse
 import os
 import markdown
-import pandas as pd
-import matplotlib.pyplot as plt
-from datetime import datetime
+from datetime import datetime, timedelta
 import glob
 
 def calculate_average_mood(entries):
+    """
+    Calculate the average mood from a list of journal entries.
+
+    Args:
+        entries (list): List of dictionaries representing journal entries.
+            Each dictionary should have a 'date' key with a datetime object
+            and a 'mood' key with an integer representing the mood.
+
+    Returns:
+        float: The average mood calculated from the list of entries.
+    """
     total_mood = sum(entry['mood'] for entry in entries)
     average_mood = total_mood / len(entries)
     return average_mood
 
 def custom_date_parser(date_string):
-    # Custom, faster date parsing can be implemented if applicable
+    """
+    Custom date parser to convert a string to a datetime object.
+
+    Args:
+        date_string (str): The date string to be parsed.
+
+    Returns:
+        datetime: The parsed datetime object.
+    """
     return datetime.strptime(date_string.replace('"', '').replace('/', ''), '%H%M %d%m%Y')
 
 if __name__ == "__main__":
@@ -39,9 +56,9 @@ if __name__ == "__main__":
 
     entries.sort(key=lambda entry: entry['date'])
     average_mood = calculate_average_mood(entries)
-    print(f"Average mood: {average_mood}")
+    print(f"Total average mood: {average_mood}")
 
-    DF = pd.DataFrame(entries)
-    plt.scatter(DF['date'], DF['mood'])
-    plt.gcf().autofmt_xdate()
-    plt.show()
+    three_weeks_ago = datetime.now() - timedelta(weeks=1)
+    recent_entries = [entry for entry in entries if entry['date'] >= three_weeks_ago]
+    average_mood_recent = calculate_average_mood(recent_entries)
+    print(f"Average mood for the last week: {average_mood_recent}")
