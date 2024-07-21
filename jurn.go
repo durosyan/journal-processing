@@ -64,7 +64,6 @@ func main() {
 	// Get current date and time
 	date := time.Now().Format("150402012006")
 
-
 	// Create the output file
 	outputFile, err := os.Create(filepath.Join(absOutputDir, "Entry_"+date+".md"))
 	if err != nil {
@@ -72,15 +71,10 @@ func main() {
 		return
 	}
 
-	
-
 	// Write the entry title to the output file
-	_, err = outputFile.WriteString("--- \n" + *entryTitle + "\n")
-
-	// Write the file content to the output file
-	_, err = outputFile.Write(fileContent)
+	_, err = outputFile.WriteString(fmt.Sprintf("--- \n%s\n", *entryTitle))
 	if err != nil {
-		fmt.Println("Error writing to output file:", err)
+		fmt.Println("Error writing title to output file:", err)
 		return
 	}
 }
