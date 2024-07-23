@@ -47,10 +47,14 @@ if __name__ == "__main__":
             file_content = file.read()
             md = markdown.Markdown(extensions=['meta'])
             md.convert(file_content)
-            if 'posted' in md.Meta and 'mood' in md.Meta and 'title' in md.Meta:
+            if ('posted' in md.Meta or 'date' in md.Meta) and 'mood' in md.Meta and 'title' in md.Meta:
                 mood = int(md.Meta['mood'][0])
                 title = md.Meta['title'][0].replace('"', '')
-                date_obj = custom_date_parser(md.Meta['posted'][0])
+                date_obj = None
+                if 'posted' in md.Meta:
+                    date_obj = custom_date_parser(md.Meta['posted'][0])
+                else:
+                    date_obj = custom_date_parser(md.Meta['date'][0])
                 entries.append({'date': date_obj, 'mood': mood, 'title': title})
 
     entries.sort(key=lambda entry: entry['date'])
