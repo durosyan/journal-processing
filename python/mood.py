@@ -52,8 +52,6 @@ if __name__ == "__main__":
                 title = md.Meta['title'][0].replace('"', '')
                 date_obj = custom_date_parser(md.Meta['posted'][0])
                 entries.append({'date': date_obj, 'mood': mood, 'title': title})
-                print(os.path.basename(file.name))
-
 
     entries.sort(key=lambda entry: entry['date'])
     average_mood = calculate_average_mood(entries)
