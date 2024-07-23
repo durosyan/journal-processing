@@ -47,18 +47,21 @@ if __name__ == "__main__":
             file_content = file.read()
             md = markdown.Markdown(extensions=['meta'])
             md.convert(file_content)
-            if 'posted' in md.Meta and 'mood' in md.Meta:
+            if 'posted' in md.Meta and 'mood' in md.Meta and 'title' in md.Meta:
                 mood = int(md.Meta['mood'][0])
+                title = md.Meta['title'][0].replace('"', '')
                 date_obj = custom_date_parser(md.Meta['posted'][0])
-                entries.append({'date': date_obj, 'mood': mood})
+                entries.append({'date': date_obj, 'mood': mood, 'title': title})
                 print(os.path.basename(file.name))
 
 
     entries.sort(key=lambda entry: entry['date'])
     average_mood = calculate_average_mood(entries)
+    print(f"Total number of entries: {len(entries)}")
     print(f"Total average mood: {average_mood}")
 
     three_weeks_ago = datetime.now() - timedelta(weeks=1)
     recent_entries = [entry for entry in entries if entry['date'] >= three_weeks_ago]
     average_mood_recent = calculate_average_mood(recent_entries)
     print(f"Average mood for the last week: {average_mood_recent}")
+    print(f"Number of entries in the last week: {len(recent_entries)}")
