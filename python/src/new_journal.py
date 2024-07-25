@@ -6,7 +6,6 @@ if __name__ == '__main__':
 	# Get the current date and time
 	now = datetime.now()
 	formatted_date = now.strftime("%H%M%d%m%Y")
-
 	template_file = os.path.join(os.path.dirname(__file__), "templates", "template.md")
 	new_file = f"Entry_{formatted_date}.md"
 

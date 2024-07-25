@@ -32,16 +32,19 @@ def custom_date_parser(date_string):
     """
     return datetime.strptime(date_string.replace('"', '').replace('/', ''), '%H%M %d%m%Y')
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="personal markdown journal")
-    parser.add_argument("directory")
-    args = parser.parse_args()
+def read_journal(md_files):
+    """
+    Read journal entries from markdown files.
 
-    directory = os.path.abspath(args.directory)
-    md_files = glob.glob(f"{directory}/**/*.md", recursive=True)
-
+    Args:
+        md_files (list): List of file paths to induvidual markdown files
+    Returns:
+        list: List of dictionaries representing journal entries.
+            Each dictionary should have a 'date' key with a datetime object,
+            a 'mood' key with an integer representing the mood, and a 'title'
+            key with a string representing the title of the entry.
+    """
     entries = []
-    
     for file_path in md_files:
         with open(file_path, "r") as file:
             file_content = file.read()
@@ -58,6 +61,17 @@ if __name__ == "__main__":
                 entries.append({'date': date_obj, 'mood': mood, 'title': title})
 
     entries.sort(key=lambda entry: entry['date'])
+    return entries
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="personal markdown journal")
+    parser.add_argument("directory")
+    args = parser.parse_args()
+
+    directory = os.path.abspath(args.directory)
+    md_files = glob.glob(f"{directory}/**/*.md", recursive=True)
+    entries = read_journal(md_files)
+
     average_mood = calculate_average_mood(entries)
     print(f"Total number of entries: {len(entries)}")
     print(f"Total average mood: {average_mood}")
@@ -67,3 +81,4 @@ if __name__ == "__main__":
     average_mood_recent = calculate_average_mood(recent_entries)
     print(f"Average mood for the last week: {average_mood_recent}")
     print(f"Number of entries in the last week: {len(recent_entries)}")
+
