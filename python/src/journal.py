@@ -1,8 +1,11 @@
 import argparse
 import os
 import markdown
+from datetime import datetime
+from jinja2 import Template
 from datetime import datetime, timedelta
 import glob
+
 
 def calculate_average_mood(entries):
     """
@@ -16,9 +19,10 @@ def calculate_average_mood(entries):
     Returns:
         float: The average mood calculated from the list of entries.
     """
-    total_mood = sum(entry['mood'] for entry in entries)
+    total_mood = sum(entry["mood"] for entry in entries)
     average_mood = total_mood / len(entries)
     return average_mood
+
 
 def custom_date_parser(date_string):
     """
@@ -30,7 +34,10 @@ def custom_date_parser(date_string):
     Returns:
         datetime: The parsed datetime object.
     """
-    return datetime.strptime(date_string.replace('"', '').replace('/', ''), '%H%M %d%m%Y')
+    return datetime.strptime(
+        date_string.replace('"', "").replace("/", ""), "%H%M %d%m%Y"
+    )
+
 
 def read_journal(md_files):
     """
@@ -48,20 +55,62 @@ def read_journal(md_files):
     for file_path in md_files:
         with open(file_path, "r") as file:
             file_content = file.read()
-            md = markdown.Markdown(extensions=['meta'])
+            md = markdown.Markdown(extensions=["meta"])
             md.convert(file_content)
-            if ('posted' in md.Meta or 'date' in md.Meta) and 'mood' in md.Meta and 'title' in md.Meta:
-                mood = int(md.Meta['mood'][0])
-                title = md.Meta['title'][0].replace('"', '')
+            if (
+                ("posted" in md.Meta or "date" in md.Meta)
+                and "mood" in md.Meta
+                and "title" in md.Meta
+            ):
+                mood = int(md.Meta["mood"][0])
+                title = md.Meta["title"][0].replace('"', "")
                 date_obj = None
-                if 'posted' in md.Meta:
-                    date_obj = custom_date_parser(md.Meta['posted'][0])
+                if "posted" in md.Meta:
+                    date_obj = custom_date_parser(md.Meta["posted"][0])
                 else:
-                    date_obj = custom_date_parser(md.Meta['date'][0])
-                entries.append({'date': date_obj, 'mood': mood, 'title': title})
+                    date_obj = custom_date_parser(md.Meta["date"][0])
+                entries.append({"date": date_obj, "mood": mood, "title": title})
 
-    entries.sort(key=lambda entry: entry['date'])
+    entries.sort(key=lambda entry: entry["date"])
     return entries
+
+
+def newEntry(title, mood):
+    """
+    Create a new journal entry file with the specified title and mood.
+
+    Args:
+        title (str): The title of the journal entry.
+        mood (int): The mood of the journal entry.
+
+    Returns:
+        None
+    """
+    now = datetime.now()
+    formatted_date = now.strftime("%H%M%d%m%Y")
+    template_file = os.path.join(os.path.dirname(__file__), "templates", "template.md")
+    new_file = f"Entry_{formatted_date}.md"
+
+    # Create a new file based on the template
+    try:
+        with open(template_file, "r") as f:
+            print(f"opened template file: {template_file}")
+            template_content = f.read()
+            template = Template(template_content)
+            properties = {
+                "posted": now.strftime("%H%M %d/%m/%Y"),
+                "title": title,
+                "mood": mood,
+            }
+            rendered_content = template.render(properties)
+
+        with open(new_file, "w") as f:
+            print(f"created new file: {new_file}")
+            f.write(rendered_content)
+
+    except Exception as e:
+        print(f"failed to create new file: {new_file}")
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="personal markdown journal")
@@ -77,8 +126,7 @@ if __name__ == "__main__":
     print(f"Total average mood: {average_mood}")
 
     three_weeks_ago = datetime.now() - timedelta(weeks=1)
-    recent_entries = [entry for entry in entries if entry['date'] >= three_weeks_ago]
+    recent_entries = [entry for entry in entries if entry["date"] >= three_weeks_ago]
     average_mood_recent = calculate_average_mood(recent_entries)
     print(f"Average mood for the last week: {average_mood_recent}")
     print(f"Number of entries in the last week: {len(recent_entries)}")
-
