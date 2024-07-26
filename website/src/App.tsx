@@ -9,7 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import Modal from '@mui/material/Modal';
+// import Modal from '@mui/material/Modal';
 // import Switch from '@mui/material/Switch';
 import TextField from '@mui/material/TextField';
 import Toolbar from '@mui/material/Toolbar';
@@ -19,22 +19,24 @@ import Typography from '@mui/material/Typography';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+
+import Slider from './Slider.tsx';
 // import './App.css';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-const modalStyle = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-};
+// const modalStyle = {
+//     position: 'absolute' as 'absolute',
+//     top: '50%',
+//     left: '50%',
+//     transform: 'translate(-50%, -50%)',
+//     width: 400,
+//     bgcolor: 'background.paper',
+//     border: '2px solid #000',
+//     boxShadow: 24,
+//     p: 4,
+// };
 
 function App() {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -57,9 +59,9 @@ function App() {
 
     const [value, setValue] = React.useState<Date | null>(null);
 
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    // const [open, setOpen] = React.useState(false);
+    // const handleOpen = () => setOpen(true);
+    // const handleClose = () => setOpen(false);
 
     return (
         <Container maxWidth="xl" sx={{ p: '0px !important' }}>
@@ -174,10 +176,10 @@ function App() {
             >
                 <Container maxWidth="xl">
                     <div>
-                        <TextField id="exampleInput" label="Example input" variant="outlined" />
+                        <TextField id="exampleInput" label="title" variant="outlined" />
                     </div>
                     <div>
-                        <TextField id="exampleTextarea" label="Example textarea" multiline rows={4} />
+                        <TextField id="exampleTextarea" label="log" multiline rows={4} />
                     </div>
                     {/* <div>
                         <FormControlLabel control={<Switch defaultChecked />} label="Example switch" />
@@ -195,6 +197,9 @@ function App() {
                         </LocalizationProvider>
                     </div>
                     <div>
+                        <Slider />
+                    </div>
+                    {/* <div>
                         <Button variant="contained" onClick={handleOpen}>Open modal</Button>
                         <Modal
                             open={open}
@@ -212,7 +217,7 @@ function App() {
                                 <Button variant="contained" onClick={handleClose} sx={{ mt: 2 }}>Close modal</Button>
                             </Box>
                         </Modal>
-                    </div>
+                    </div> */}
                 </Container>
             </Box>
         </Container>
