@@ -26,6 +26,9 @@ importers:
       '@mui/material':
         specifier: ^5.4.3
         version: 5.16.5(@emotion/react@11.13.0(@types/react@17.0.80)(react@17.0.2))(@emotion/styled@11.13.0(@emotion/react@11.13.0(@types/react@17.0.80)(react@17.0.2))(@types/react@17.0.80)(react@17.0.2))(@types/react@17.0.80)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)
+      '@mui/x-date-pickers':
+        specifier: ^7.11.1
+        version: 7.11.1(@emotion/react@11.13.0(@types/react@17.0.80)(react@17.0.2))(@emotion/styled@11.13.0(@emotion/react@11.13.0(@types/react@17.0.80)(react@17.0.2))(@types/react@17.0.80)(react@17.0.2))(@mui/material@5.16.5(@emotion/react@11.13.0(@types/react@17.0.80)(react@17.0.2))(@emotion/styled@11.13.0(@emotion/react@11.13.0(@types/react@17.0.80)(react@17.0.2))(@types/react@17.0.80)(react@17.0.2))(@types/react@17.0.80)(react-dom@17.0.2(react@17.0.2))(react@17.0.2))(@types/react@17.0.80)(date-fns@2.30.0)(dayjs@1.11.12)(luxon@2.5.2)(moment@2.30.1)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)
       '@testing-library/dom':
         specifier: ^7.21.4
         version: 7.31.2
@@ -38,9 +41,6 @@ importers:
       '@testing-library/user-event':
         specifier: ^13.5.0
         version: 13.5.0(@testing-library/dom@7.31.2)
-      '@types/date-fns':
-        specifier: ^2.6.0
-        version: 2.6.0
       '@types/jest':
         specifier: ^27.4.1
         version: 27.5.2
@@ -1250,6 +1250,42 @@ packages:
       '@types/react':
         optional: true
 
+  '@mui/x-date-pickers@7.11.1':
+    resolution: {integrity: sha512-CflouzTNSv0YeOA8iiYpJMtqGlwGC8LI9EE9egDGhatR9Mn5geRDTXsm0rRG/4pMOfaRxyJc6Yzr/axBhEXM7w==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      '@emotion/react': ^11.9.0
+      '@emotion/styled': ^11.8.1
+      '@mui/material': ^5.15.14
+      date-fns: ^2.25.0 || ^3.2.0
+      date-fns-jalali: ^2.13.0-0 || ^3.2.0-0
+      dayjs: ^1.10.7
+      luxon: ^3.0.2
+      moment: ^2.29.4
+      moment-hijri: ^2.1.2
+      moment-jalaali: ^0.7.4 || ^0.8.0 || ^0.9.0 || ^0.10.0
+      react: ^17.0.0 || ^18.0.0
+      react-dom: ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      '@emotion/react':
+        optional: true
+      '@emotion/styled':
+        optional: true
+      date-fns:
+        optional: true
+      date-fns-jalali:
+        optional: true
+      dayjs:
+        optional: true
+      luxon:
+        optional: true
+      moment:
+        optional: true
+      moment-hijri:
+        optional: true
+      moment-jalaali:
+        optional: true
+
   '@nicolo-ribaudo/eslint-scope-5-internals@5.1.1-v1':
     resolution: {integrity: sha512-54/JRvkLIzzDWshCWfuhadfrfZVPiElY8Fcgmg1HroEly/EDSszzhBAsarCux+D/kOslTRquNzuyGSmUSTTHGg==}
 
@@ -1463,10 +1499,6 @@ packages:
 
   '@types/connect@3.4.38':
     resolution: {integrity: sha512-K6uROf1LD88uDQqJCktA4yzL1YYAK6NgfsI0v/mTgyPKWsX1CnJ0XPSDhViejru1GcRkLWb8RlzFYJRqGUbaug==}
-
-  '@types/date-fns@2.6.0':
-    resolution: {integrity: sha512-9DSw2ZRzV0Tmpa6PHHJbMcZn79HHus+BBBohcOaDzkK/G3zMjDUDYjJIWBFLbkh+1+/IOS0A59BpQfdr37hASg==}
-    deprecated: This is a stub types definition for date-fns (https://github.com/date-fns/date-fns). date-fns provides its own type definitions, so you don't need @types/date-fns installed!
 
   '@types/eslint-scope@3.7.7':
     resolution: {integrity: sha512-MzMFlSLBqNF2gcHWO0G1vP/YQyfvrxZ0bF+u7mzUdZ1/xK4A4sru+nraZz5i3iEIk1l1uyicaDVTB4QbbEkAYg==}
@@ -7332,6 +7364,29 @@ snapshots:
     optionalDependencies:
       '@types/react': 17.0.80
 
+  '@mui/x-date-pickers@7.11.1(@emotion/react@11.13.0(@types/react@17.0.80)(react@17.0.2))(@emotion/styled@11.13.0(@emotion/react@11.13.0(@types/react@17.0.80)(react@17.0.2))(@types/react@17.0.80)(react@17.0.2))(@mui/material@5.16.5(@emotion/react@11.13.0(@types/react@17.0.80)(react@17.0.2))(@emotion/styled@11.13.0(@emotion/react@11.13.0(@types/react@17.0.80)(react@17.0.2))(@types/react@17.0.80)(react@17.0.2))(@types/react@17.0.80)(react-dom@17.0.2(react@17.0.2))(react@17.0.2))(@types/react@17.0.80)(date-fns@2.30.0)(dayjs@1.11.12)(luxon@2.5.2)(moment@2.30.1)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)':
+    dependencies:
+      '@babel/runtime': 7.24.8
+      '@mui/base': 5.0.0-beta.40(@types/react@17.0.80)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)
+      '@mui/material': 5.16.5(@emotion/react@11.13.0(@types/react@17.0.80)(react@17.0.2))(@emotion/styled@11.13.0(@emotion/react@11.13.0(@types/react@17.0.80)(react@17.0.2))(@types/react@17.0.80)(react@17.0.2))(@types/react@17.0.80)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)
+      '@mui/system': 5.16.5(@emotion/react@11.13.0(@types/react@17.0.80)(react@17.0.2))(@emotion/styled@11.13.0(@emotion/react@11.13.0(@types/react@17.0.80)(react@17.0.2))(@types/react@17.0.80)(react@17.0.2))(@types/react@17.0.80)(react@17.0.2)
+      '@mui/utils': 5.16.5(@types/react@17.0.80)(react@17.0.2)
+      '@types/react-transition-group': 4.4.10
+      clsx: 2.1.1
+      prop-types: 15.8.1
+      react: 17.0.2
+      react-dom: 17.0.2(react@17.0.2)
+      react-transition-group: 4.4.5(react-dom@17.0.2(react@17.0.2))(react@17.0.2)
+    optionalDependencies:
+      '@emotion/react': 11.13.0(@types/react@17.0.80)(react@17.0.2)
+      '@emotion/styled': 11.13.0(@emotion/react@11.13.0(@types/react@17.0.80)(react@17.0.2))(@types/react@17.0.80)(react@17.0.2)
+      date-fns: 2.30.0
+      dayjs: 1.11.12
+      luxon: 2.5.2
+      moment: 2.30.1
+    transitivePeerDependencies:
+      - '@types/react'
+
   '@nicolo-ribaudo/eslint-scope-5-internals@5.1.1-v1':
     dependencies:
       eslint-scope: 5.1.1
@@ -7583,10 +7638,6 @@ snapshots:
   '@types/connect@3.4.38':
     dependencies:
       '@types/node': 16.18.104
-
-  '@types/date-fns@2.6.0':
-    dependencies:
-      date-fns: 2.30.0
 
   '@types/eslint-scope@3.7.7':
     dependencies:
