@@ -4,13 +4,13 @@ import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
-import FormControlLabel from '@mui/material/FormControlLabel';
+// import FormControlLabel from '@mui/material/FormControlLabel';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Modal from '@mui/material/Modal';
-import Switch from '@mui/material/Switch';
+// import Switch from '@mui/material/Switch';
 import TextField from '@mui/material/TextField';
 import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
@@ -179,9 +179,9 @@ function App() {
                     <div>
                         <TextField id="exampleTextarea" label="Example textarea" multiline rows={4} />
                     </div>
-                    <div>
+                    {/* <div>
                         <FormControlLabel control={<Switch defaultChecked />} label="Example switch" />
-                    </div>
+                    </div> */}
                     <div>
                         <LocalizationProvider dateAdapter={AdapterDateFns}>
                             <DatePicker
@@ -190,7 +190,7 @@ function App() {
                                 onChange={(newValue: any) => {
                                     setValue(newValue);
                                 }}
-                                renderInput={(params: any) => <TextField {...params} />}
+                                slotProps={{ textField: { variant: 'outlined' } }}
                             />
                         </LocalizationProvider>
                     </div>
