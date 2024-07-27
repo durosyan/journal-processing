@@ -20,7 +20,6 @@ export default function ContinuousSlider() {
                 </Typography>
                 <Slider aria-label="Volume" value={value} onChange={handleChange} />
             </Stack>
-            {/* <Slider disabled defaultValue={30} aria-label="Disabled slider" /> */}
         </Box>
     );
 }
