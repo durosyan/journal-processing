@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
+	"log"
 	"os"
 	"path/filepath"
 	"strings"
@@ -26,19 +27,23 @@ func main() {
 		os.Exit(1)
 	}
 
+	reader := bufio.NewReader(os.Stdin)
+
 	// define title
-	var entryTitle string
 	fmt.Print("Enter the title of the entry: ")
-	readerTitle := bufio.NewReader(os.Stdin)      // Create a new buffered reader
-	titleInput, _ := readerTitle.ReadString('\n') // Read the entire line
-	entryTitle = strings.TrimSpace(titleInput)    // Trim newline character
+	titleInput, err := reader.ReadString('\n') // Read the entire line
+	if err != nil {
+		log.Fatal("Error reading title input:", err)
+	}
+	entryTitle := strings.TrimSpace(titleInput) // Trim newline character
 
 	// define mood
-	var mood string
 	fmt.Print("Enter the mood of the entry between 0 and 100: ")
-	readerMood := bufio.NewReader(os.Stdin)     // Create a new buffered reader
-	moodInput, _ := readerMood.ReadString('\n') // Read the entire line
-	mood = strings.TrimSpace(moodInput)         // Trim newline character
+	moodInput, err := reader.ReadString('\n') // Read the entire line
+	if err != nil {
+		log.Fatal("Error reading mood input:", err)
+	}
+	mood := strings.TrimSpace(moodInput) // Trim newline character
 
 	// Access the parsed arguments
 	if *verbose {
