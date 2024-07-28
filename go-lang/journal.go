@@ -16,6 +16,10 @@ import (
 func main() {
 	// Define command line arguments
 	pwd, err := os.Getwd()
+	if err != nil {
+		fmt.Println("Error getting current working directory:", err)
+		os.Exit(1)
+	}
 	outputDir := flag.String("output", pwd, "Output directory")
 	verbose := flag.Bool("verbose", false, "Enable verbose mode")
 
